@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lemonade Lounge — Chibi Edition</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo"><span class="logo-leaf"></span><b>Lemonade Lounge</b><small>chibi café</small></div>
+  <div class="topbar-actions"><button id="tutorialBtn" class="tutorial-btn">🍋 How to play</button><button id="muteBtn" class="tutorial-btn" aria-label="Toggle sound">🔊</button></div><div class="stats">
+    <span>Day <b id="day">1</b></span><span>🥤 Served <b id="totalServed">0</b></span><span id="streakStat">🔥 <b id="streak">0</b></span><span>⭐ <b id="stars">0</b></span>
+    <span>💰 $<b id="money">0.00</b></span><span>★ <b id="rating">5.0</b></span>
+  </div>
+</header>
+
+<main>
+<section id="counter" class="scene active">
+  <div class="heading"><div><small>FRONT COUNTER</small><h1>Who wants a little sunshine?</h1><p>Meet the next chibi customer, hear their strange request, and take their ticket.</p></div><button class="navbtn" data-go="cashier">Cashier →</button></div>
+  <div class="counter-grid">
+    <div class="shop-card counter-card">
+      <div class="awning"></div>
+      <div id="customerStage" class="customer-stage"></div>
+      <div id="customerSpeech" class="speech">A customer is approaching...</div>
+      <button id="takeOrder" class="bigbtn">Take their order</button>
+    </div>
+    <div class="shop-card">
+      <h2>Queue</h2><div id="queue"></div>
+      <div class="queue-tip">Customers keep arriving while you work. Click a waiting ticket to bring them to the front — handy for VIPs 👑 — or click one you've already taken to jump to the Cashier.</div>
+    </div>
+  </div>
+</section>
+
+<section id="cashier" class="scene">
+  <div class="heading"><div><small>CASHIER</small><h1>Tickets, tips & trouble</h1><p>Choose an active ticket and send it to the Lemon Lab.</p></div><button class="navbtn" data-go="kitchen">Kitchen →</button></div>
+  <div class="two-grid"><div class="shop-card"><h2>Waiting customers</h2><div id="customerList"></div></div>
+  <div class="shop-card"><h2>Active ticket</h2><div id="orderTimer" class="order-timer hidden">3:00</div><div id="activeOrder" class="ticket-empty">Choose a customer.</div><div id="missingParts" class="missing-parts"></div><button id="sendKitchen" class="bigbtn" disabled>Send to Lemon Lab</button></div></div>
+</section>
+
+<section id="kitchen" class="scene">
+  <div class="heading"><div><small>LEMON LAB</small><h1>Build the drink ✦</h1><p>Everything you add is animated onto the same cup. No emoji-only placeholder art.</p></div><button class="navbtn" data-go="dropoff">Drop-off →</button></div>
+  <div class="kitchen-grid">
+    <aside class="shop-card"><h2>Order progress</h2><div id="kitchenTicket"></div><div class="progress-wrap"><div id="progressBar"></div></div><b id="progressText">0%</b><p id="kitchenHint" class="hint">Start with the flavour.</p></aside>
+    <div class="lab-board">
+      <div class="machines">
+        <div class="machine" data-machine="flavour"><h3>Flavour Mixer</h3><div class="bottles" id="flavours"></div><div id="flavourChip" class="flavour-chip-zone">Click a bottle to select its flavour</div></div>
+        <div class="machine" data-machine="fizz"><h3>Fizz Spinner</h3><div class="spinner" id="spinner"></div><div class="machine-slot" data-slot="fizz">Click, or drop your cup here</div></div>
+        <div class="machine" data-machine="whip"><h3>Cloud Whipper</h3><div class="whipper-art"><i></i><i></i><i></i></div><div class="machine-slot" data-slot="whip">Click, or drop your cup here</div></div>
+      </div>
+      <div class="prep-card"><h3>Animated drink</h3>
+      <div class="mini-tools">
+        <button id="pourBtn">Pour</button><button id="iceBtn">Scoop ice</button><button id="shakeBtn">Shake</button>
+      </div><div id="drinkBench" class="drink-bench"><div class="bench-note">Your cup appears here.</div></div></div>
+      <div class="topping-card"><h3>Toppings — click or drag onto the cup</h3><div id="toppings" class="topping-grid"></div></div>
+      <button id="finishDrink" class="bigbtn" disabled>Send finished drink →</button>
+    </div>
+  </div>
+</section>
+
+<section id="dropoff" class="scene">
+  <div class="heading"><div><small>DROP-OFF</small><h1>Find the right customer</h1><p>Click a ready drink then its owner, or drag the drink to its owner.</p></div><button class="navbtn" data-go="counter">Counter →</button></div>
+  <div class="two-grid"><div class="shop-card"><h2>Ready drinks</h2><div id="readyDrinks" class="ready-grid"></div></div><div class="shop-card"><h2>Customers</h2><div id="dropCustomers"></div></div></div>
+</section>
+</main>
+
+<button id="shopBtn" class="shop-float" aria-label="Open shop upgrades">✦<small>Shop</small></button>
+<button id="bookBtn" class="book-float" aria-label="Open achievements">🏆<small>Goals</small></button>
+<button id="phone" class="phone" aria-label="Open reviews"><span class="phone-speaker"></span><span class="phone-screen"><b>BuzzBook</b><small>reviews</small></span></button>
+<div id="shopPanel" class="review-panel">
+  <div class="review-head"><h2>✨ Lemon Lab Shop</h2><button id="closeShop">×</button></div>
+  <h3>Supplies</h3><div id="supplies"></div>
+  <p class="hint">Spend your tips on permanent upgrades. They help the café survive busier days.</p>
+  <div id="upgrades"></div>
+  <h3>Staff</h3><div id="staff"></div>
+  <h3>Cup cosmetics</h3><div id="cosmetics"></div>
+</div>
+<div id="bookPanel" class="review-panel">
+  <div class="review-head"><h2>🏆 Chibi Goals</h2><button id="closeBook">×</button></div>
+  <div id="achievements"></div>
+  <h3>Customer lore</h3><div id="lore"></div>
+</div>
+<div id="tutorialPanel" class="tutorial-panel">
+  <div class="tutorial-card">
+    <button id="tutorialClose" class="tutorial-close">×</button>
+    <div class="tutorial-icon">🍋</div>
+    <small>WELCOME TO</small>
+    <h1>Lemonade Lounge</h1>
+    <p class="tutorial-sub">A tiny chibi café where every order becomes a little adventure.</p>
+    <div id="tutorialStep" class="tutorial-step"></div>
+    <div class="tutorial-controls">
+      <button id="tutorialBack">← Back</button>
+      <div id="tutorialDots"></div>
+      <button id="tutorialNext">Next →</button>
+    </div>
+  </div>
+</div>
+<div id="reviewPanel" class="review-panel"><div class="review-head"><h2>BuzzBook</h2><button id="closePhone">×</button></div><div class="rating-big">★ <b id="phoneRating">5.0</b><small>community rating</small></div><div id="reviews"></div></div>
+<div id="toast"></div>
+<div id="dayOverlay"></div>
+<nav class="bottom-nav"><button data-go="counter">Counter</button><button data-go="cashier">Cashier</button><button data-go="kitchen">Kitchen</button><button data-go="dropoff">Drop-off</button></nav>
+<script src="script.js"></script>
+</body>
+</html>
